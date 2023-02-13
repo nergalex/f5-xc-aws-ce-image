@@ -12,7 +12,7 @@ Terraform to create F5XC AWS cloud CE
 - Initialize with: `terraform init`
 - Apply with: `terraform apply -auto-approve` or destroy with: `terraform destroy -auto-approve`
 
-## AWS Cloud CE module usage example
+## AWS Cloud CE Single Node Single NIC module usage example
 
 ````hcl
 variable "project_prefix" {
@@ -77,7 +77,7 @@ locals {
   custom_tags           = {
     Owner        = var.owner
     f5xc-tenant  = var.f5xc_tenant
-    f5xc-feature = "f5xc-aws-vpc-site"
+    f5xc-feature = "${var.project_prefix}-aws-vpc-site"
   }
 }
 
@@ -94,37 +94,28 @@ provider "aws" {
 
 module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
-  cluster_name          = format("%s-f5xc-aws-ce-test-%s", var.project_prefix, var.project_suffix)
-  cluster_latitude      = "5678.9856"
-  cluster_longitude     = "5632.12314"
   aws_vpc_subnet_prefix = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token
   f5xc_api_url          = var.f5xc_api_url
   f5xc_aws_vpc_az_nodes = {
     node0 = {
-      f5xc_aws_vpc_slo_subnet = "192.168.168.0/26",
-      f5xc_aws_vpc_sli_subnet = "192.168.168.64/26",
-      f5xc_aws_vpc_az_name    = local.aws_availability_zone
-    },
-    node1 = {
-      f5xc_aws_vpc_slo_subnet = "192.168.168.128/26",
-      f5xc_aws_vpc_sli_subnet = "192.168.168.192/26",
-      f5xc_aws_vpc_az_name    = local.aws_availability_zone
-    },
-    node2 = {
-      f5xc_aws_vpc_slo_subnet = "192.168.169.0/26",
-      f5xc_aws_vpc_sli_subnet = "192.168.169.64/26",
+      f5xc_aws_vpc_slo_subnet = "192.168.0.0/26",
       f5xc_aws_vpc_az_name    = local.aws_availability_zone
     }
   }
-  f5xc_ce_gateway_type = "ingress_gateway"
-  f5xc_namespace       = var.f5xc_namespace
-  f5xc_tenant          = var.f5xc_tenant
-  f5xc_token_name      = format("%s-f5xc-aws-ce-test-%s", var.project_prefix, var.project_suffix)
-  owner_tag            = var.owner
-  public_name          = "vip"
-  ssh_public_key       = file(var.ssh_public_key_file)
-  providers            = {
+  f5xc_ce_gateway_type   = "ingress_gateway"
+  f5xc_namespace         = var.f5xc_namespace
+  f5xc_tenant            = var.f5xc_tenant
+  f5xc_token_name        = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_aws_region        = var.f5xc_aws_region
+  f5xc_cluster_latitude  = -73.935242
+  f5xc_cluster_longitude = 40.730610
+  f5xc_cluster_name      = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_labels    = {"ves.io/fleet": format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)}
+  owner_tag              = var.owner
+  public_name            = "vip"
+  ssh_public_key         = file(var.ssh_public_key_file)
+  providers              = {
     aws      = aws.default
     volterra = volterra.default
   }
@@ -134,3 +125,9 @@ output "aws_ce" {
   value = module.aws_ce
 }
 ````
+
+## AWS Cloud CE Single Node Multi NIC module usage example
+
+```hcl
+
+```

@@ -98,6 +98,8 @@ provider "aws" {
 ```hcl
 module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
+  is_sensitive          = false
+  has_public_ip         = true
   aws_vpc_subnet_prefix = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token
   f5xc_api_url          = var.f5xc_api_url
@@ -115,7 +117,7 @@ module "aws_ce" {
   f5xc_cluster_latitude  = -73.935242
   f5xc_cluster_longitude = 40.730610
   f5xc_cluster_name      = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
-  f5xc_cluster_labels    = {"ves.io/fleet": format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)}
+  f5xc_cluster_labels    = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
   owner_tag              = var.owner
   public_name            = "vip"
   ssh_public_key         = file(var.ssh_public_key_file)
@@ -135,6 +137,7 @@ output "aws_ce" {
 ```hcl
 module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
+  is_sensitive          = false
   has_public_ip         = true
   aws_vpc_subnet_prefix = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token

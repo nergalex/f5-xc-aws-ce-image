@@ -77,6 +77,8 @@ provider "aws" {
 
 module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
+  has_public_ip         = true
+  is_sensitive          = false
   aws_vpc_subnet_prefix = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token
   f5xc_api_url          = var.f5xc_api_url

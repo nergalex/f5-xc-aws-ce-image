@@ -172,8 +172,49 @@ output "aws_ce" {
 }
 ```
 
-## AWS Cloud CE Multi Node Single NIC module usage example
+## AWS Cloud CE Multi Node Single NIC different AZ module usage example
 
 ```hcl
+module "aws_ce" {
+  source                = "./modules/f5xc/ce/aws"
+  owner_tag             = var.owner
+  has_public_ip         = true
+  is_sensitive          = false
+  aws_vpc_cidr_block    = "192.168.0.0/20"
+  f5xc_slo_cidr_block   = "192.168.0.0/25"
+  f5xc_api_token        = var.f5xc_api_token
+  f5xc_api_url          = var.f5xc_api_url
+  f5xc_aws_vpc_az_nodes = {
+    node0 = {
+      f5xc_aws_vpc_slo_subnet = "192.168.0.0/26",
+      f5xc_aws_vpc_az_name    = format("%s%s", var.f5xc_aws_region, "a")
+    },
+    node1 = {
+      f5xc_aws_vpc_slo_subnet = "192.168.0.64/26",
+      f5xc_aws_vpc_az_name    = format("%s%s", var.f5xc_aws_region, "b")
+    },
+    node2 = {
+      f5xc_aws_vpc_slo_subnet = "192.168.0.128/26",
+      f5xc_aws_vpc_az_name    = format("%s%s", var.f5xc_aws_region, "c")
+    }
+  }
+  f5xc_ce_gateway_type   = "ingress_gateway"
+  f5xc_namespace         = var.f5xc_namespace
+  f5xc_tenant            = var.f5xc_tenant
+  f5xc_token_name        = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_aws_region        = var.f5xc_aws_region
+  f5xc_cluster_latitude  = -73.935242
+  f5xc_cluster_longitude = 40.730610
+  f5xc_cluster_name      = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_labels    = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
+  ssh_public_key         = file(var.ssh_public_key_file)
+  providers              = {
+    aws      = aws.default
+    volterra = volterra.default
+  }
+}
 
+output "aws_ce" {
+  value = module.aws_ce
+}
 ```

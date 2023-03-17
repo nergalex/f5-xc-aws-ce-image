@@ -266,3 +266,201 @@ output "aws_ce" {
   value = module.aws_ce
 }
 ```
+
+## AWS Secure Cloud CE Single Node Single NIC module usage example
+
+```hcl
+module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
+  source             = "./modules/aws/vpc"
+  aws_owner          = var.owner
+  aws_region         = var.f5xc_aws_region
+  aws_az_name        = local.aws_availability_zone
+  aws_vpc_name       = format("%s-vpc-sn-snic-exist-vpc-and-snet-%s", var.project_prefix, var.project_suffix)
+  aws_vpc_cidr_block = "172.16.44.0/22"
+  custom_tags        = local.custom_tags
+  providers          = {
+    aws = aws.default
+  }
+}
+
+module "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+  source                = "./modules/f5xc/ce/aws"
+  owner_tag             = var.owner
+  is_sensitive          = false
+  has_public_ip         = false
+  create_new_aws_vpc    = false
+  f5xc_tenant           = var.f5xc_tenant
+  f5xc_api_url          = var.f5xc_api_url
+  f5xc_api_token        = var.f5xc_api_token
+  f5xc_namespace        = var.f5xc_namespace
+  f5xc_token_name       = format("%s-secure-cloud-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_aws_region       = var.f5xc_aws_region
+  f5xc_cluster_name     = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_labels   = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
+  f5xc_ce_gateway_type  = "ingress_gateway"
+  f5xc_aws_vpc_az_nodes = {
+    node0 = {
+      f5xc_aws_vpc_slo_subnet    = "172.16.44.0/27",
+      f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "a"),
+      f5xc_aws_vpc_nat_gw_subnet = "172.16.44.32/27",
+    }
+  }
+  f5xc_cluster_latitude                = -73.935242
+  f5xc_cluster_longitude               = 40.730610
+  f5xc_is_secure_cloud_ce              = true
+  aws_existing_vpc_id                  = module.vpc__multi_node_single_nic_existing_vpc_existing_subnet.aws_vpc["id"]
+  aws_security_group_rules_slo_egress  = []
+  aws_security_group_rules_slo_ingress = []
+  aws_security_group_rules_sli_egress  = [
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["10.0.0.0/8"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.0.0/16"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["172.16.0.0/12"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["10.0.0.0/8"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["192.168.0.0/16"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["172.16.0.0/12"]
+    }
+  ]
+  ssh_public_key = file(var.ssh_public_key_file)
+  providers      = {
+    aws      = aws.default
+    volterra = volterra.default
+  }
+}
+
+output "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+  value = module.f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc
+}
+```
+
+## AWS Secure Cloud CE Multi Node Multi NIC different AZ module usage example
+
+```hcl
+module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
+  source             = "./modules/aws/vpc"
+  aws_owner          = var.owner
+  aws_region         = var.f5xc_aws_region
+  aws_az_name        = local.aws_availability_zone
+  aws_vpc_name       = format("%s-vpc-sn-snic-exist-vpc-and-snet-%s", var.project_prefix, var.project_suffix)
+  aws_vpc_cidr_block = "172.16.44.0/22"
+  custom_tags        = local.custom_tags
+  providers          = {
+    aws = aws.default
+  }
+}
+
+module "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+  source                = "./modules/f5xc/ce/aws"
+  owner_tag             = var.owner
+  is_sensitive          = false
+  has_public_ip         = false
+  create_new_aws_vpc    = false
+  f5xc_tenant           = var.f5xc_tenant
+  f5xc_api_url          = var.f5xc_api_url
+  f5xc_api_token        = var.f5xc_api_token
+  f5xc_namespace        = var.f5xc_namespace
+  f5xc_token_name       = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_aws_region       = var.f5xc_aws_region
+  f5xc_cluster_name     = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_labels   = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
+  f5xc_ce_gateway_type  = "ingress_gateway"
+  f5xc_aws_vpc_az_nodes = {
+    node0 = {
+      f5xc_aws_vpc_slo_subnet    = "172.16.44.0/27",
+      f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "a"),
+      f5xc_aws_vpc_nat_gw_subnet = "172.16.44.32/27",
+    },
+    node1 = {
+      f5xc_aws_vpc_slo_subnet    = "172.16.44.64/27",
+      f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "b"),
+      f5xc_aws_vpc_nat_gw_subnet = "172.16.44.96/27",
+    },
+    node2 = {
+      f5xc_aws_vpc_slo_subnet    = "172.16.44.128/27",
+      f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "c"),
+      f5xc_aws_vpc_nat_gw_subnet = "172.16.44.160/27",
+    }
+  }
+  f5xc_cluster_latitude                = -73.935242
+  f5xc_cluster_longitude               = 40.730610
+  f5xc_is_secure_cloud_ce              = true
+  aws_existing_vpc_id                  = module.vpc__multi_node_single_nic_existing_vpc_existing_subnet.aws_vpc["id"]
+  aws_security_group_rules_slo_egress  = []
+  aws_security_group_rules_slo_ingress = []
+  aws_security_group_rules_sli_egress  = [
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["10.0.0.0/8"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["192.168.0.0/16"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "tcp"
+      cidr_blocks = ["172.16.0.0/12"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["10.0.0.0/8"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["192.168.0.0/16"]
+    },
+    {
+      from_port   = 0
+      to_port     = 65535
+      protocol    = "udp"
+      cidr_blocks = ["172.16.0.0/12"]
+    }
+  ]
+  ssh_public_key = file(var.ssh_public_key_file)
+  providers      = {
+    aws      = aws.default
+    volterra = volterra.default
+  }
+}
+
+output "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+  value = module.f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc
+}
+```

@@ -75,7 +75,7 @@ provider "aws" {
   alias  = "default"
 }
 
-module "aws_ce" {
+module "f5xc_aws_cloud_ce_single_node_single_nic_new_vpc_new_subnet" {
   source                = "./modules/f5xc/ce/aws"
   owner_tag             = var.owner
   is_sensitive          = false
@@ -107,6 +107,6 @@ module "aws_ce" {
   }
 }
 
-output "aws_ce" {
-  value = module.aws_ce
+output "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+  value = module.f5xc_aws_cloud_ce_single_node_single_nic_new_vpc_new_subnet
 }

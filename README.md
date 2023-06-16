@@ -100,7 +100,7 @@ module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
   is_sensitive          = false
   has_public_ip         = true
-  aws_vpc_subnet_prefix = "192.168.0.0/20"
+  aws_vpc_cidr_block    = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token
   f5xc_api_url          = var.f5xc_api_url
   f5xc_aws_vpc_az_nodes = {
@@ -139,7 +139,7 @@ module "aws_ce" {
   source                = "./modules/f5xc/ce/aws"
   is_sensitive          = false
   has_public_ip         = true
-  aws_vpc_subnet_prefix = "192.168.0.0/20"
+  aws_vpc_cidr_block    = "192.168.0.0/20"
   f5xc_api_token        = var.f5xc_api_token
   f5xc_api_url          = var.f5xc_api_url
   f5xc_aws_vpc_az_nodes = {

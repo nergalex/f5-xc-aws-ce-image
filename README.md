@@ -283,7 +283,7 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
   }
 }
 
-module "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
+module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   source                = "./modules/f5xc/ce/aws"
   owner_tag             = var.owner
   is_sensitive          = false
@@ -356,8 +356,8 @@ module "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
   }
 }
 
-output "f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc" {
-  value = module.f5xc_aws_secure_ce_multi_node_single_nic_existing_vpc
+output "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
+  value = module.f5xc_aws_secure_ce_single_node_single_nic_existing_vpc
 }
 ```
 

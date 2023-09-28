@@ -34,6 +34,8 @@ jobs:
         run: terraform init -upgrade
       - name: Terraform Validate
         id: validate
+        env:
+          TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
         run: terraform validate -no-color
   aws-cloud-ce-module-plan:
     runs-on: ubuntu-latest

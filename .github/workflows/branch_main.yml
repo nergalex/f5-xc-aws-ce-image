@@ -78,7 +78,7 @@ jobs:
         env:
           GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
         run: |
-          echo ${GH_F5XC_API_P12_FILE_B64} | base64 --decode > f5-xc-cert/${F5XC_API_P12_FILE}
+          cd f5-xc-cert && echo ${GH_F5XC_API_P12_FILE_B64} | base64 --decode > ${F5XC_API_P12_FILE}
       - name: List files in the cert release
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert

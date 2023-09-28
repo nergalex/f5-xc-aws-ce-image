@@ -17,7 +17,6 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   is_sensitive          = false
   has_public_ip         = false
   create_new_aws_vpc    = false
-  is_multi_nic          = false # Custom Alexis
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
   f5xc_api_token        = var.f5xc_api_token

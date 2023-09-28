@@ -21,10 +21,9 @@ jobs:
       - name: Retrieve the secret and decode it to a file
         env:
           GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
-          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
         run: |
           mkdir -p f5-xc-cert
-          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> "${F5XC_API_P12_FILE}"
+          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> f5-xc-cert/cert.p12
       - name: List certificate
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert

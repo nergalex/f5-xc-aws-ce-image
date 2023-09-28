@@ -10,7 +10,11 @@ variable "project_suffix" {
   default     = "01"
 }
 
-variable "f5xc_api_p12_file" {
+variable "f5xc_api_cert" {
+  type = string
+}
+
+variable "f5xc_api_key" {
   type = string
 }
 

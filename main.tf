@@ -18,7 +18,8 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   has_public_ip         = false
   create_new_aws_vpc    = false
   f5xc_tenant           = var.f5xc_tenant
-  f5xc_api_p12_file     = "f5-xc-cert/cert.p12"
+  f5xc_api_cert         = var.f5xc_api_cert
+  f5xc_api_key          = var.f5xc_api_key
   f5xc_api_url          = var.f5xc_api_url
   f5xc_api_token        = var.f5xc_api_token
   f5xc_namespace        = var.f5xc_namespace

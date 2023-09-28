@@ -1,4 +1,4 @@
-name: F5XC AWS Cloud CE module v0.11.22
+name: F5XC AWS Cloud CE module main
 on: workflow_dispatch
 jobs:
   aws-cloud-ce-module-validate:
@@ -10,13 +10,13 @@ jobs:
       - name: Check out release and submodules
         uses: actions/checkout@v3
         with:
-          ref: 0.11.22
+          ref: main
           fetch-depth: 0
           submodules: recursive
       - name: Checkout support repo
         uses: actions/checkout@v3
         with:
-          repository: cklewar/f5-xc-test
+          repository: nergalex/f5-xc-aws-ce-cloud_image
           path: f5-xc-cert
           token:  ${{ secrets.GH_PAT }}
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."
@@ -61,7 +61,7 @@ jobs:
       - name: Checkout support repo
         uses: actions/checkout@v3
         with:
-          repository: cklewar/f5-xc-test
+          repository: nergalex/f5-xc-aws-ce-cloud_image
           path: f5-xc-cert
           token:  ${{ secrets.GH_PAT }}
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."
@@ -123,7 +123,7 @@ jobs:
       - name: Checkout support repo
         uses: actions/checkout@v3
         with:
-          repository: cklewar/f5-xc-test
+          repository: nergalex/f5-xc-aws-ce-cloud_image
           path: f5-xc-cert
           token:  ${{ secrets.GH_PAT }}
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."
@@ -185,7 +185,7 @@ jobs:
       - name: Checkout support repo
         uses: actions/checkout@v3
         with:
-          repository: cklewar/f5-xc-test
+          repository: nergalex/f5-xc-aws-ce-cloud_image
           path: f5-xc-cert
           token: ${{ secrets.GH_PAT }}
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."
@@ -247,7 +247,7 @@ jobs:
       - name: Checkout support repo
         uses: actions/checkout@v3
         with:
-          repository: cklewar/f5-xc-test
+          repository: nergalex/f5-xc-aws-ce-cloud_image
           path: f5-xc-cert
           token:  ${{ secrets.GH_PAT }}
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."

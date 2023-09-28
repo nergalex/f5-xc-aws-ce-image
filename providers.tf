@@ -1,5 +1,5 @@
 provider "volterra" {
-  api_url       = var.f5xc_api_url
+  url       = var.f5xc_api_url
   api_cert      = var.f5xc_api_cert
   api_key       = var.f5xc_api_key
   alias         = "default"

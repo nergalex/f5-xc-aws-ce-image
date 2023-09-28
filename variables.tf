@@ -10,7 +10,22 @@ variable "project_suffix" {
   default     = "01"
 }
 
-variable "f5xc_api_p12_file" {
+variable "f5xc_api_cert" {
+  type = string
+  default = ""
+}
+
+variable "aws_access_key_id" {
+  type = string
+  default = ""
+}
+
+variable "aws_secret_access_key" {
+  type = string
+  default = ""
+}
+
+variable "f5xc_api_key" {
   type = string
   default = ""
 }

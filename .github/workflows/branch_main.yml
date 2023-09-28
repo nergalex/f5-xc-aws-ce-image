@@ -76,11 +76,10 @@ jobs:
           TF_VAR_f5xc_tenant: ${{ secrets.F5XC_TENANT }}
           TF_VAR_f5xc_api_token: ${{ secrets.F5XC_API_TOKEN }}
           TF_VAR_f5xc_api_credential_password: ${{ secrets.F5XC_API_CREDENTIAL_PASSWORD }}
+          TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_aws_secret_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           # AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_ACCESS_KEY_ID: "ASIAZLNXUXZZ2SMXAK32"
           # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: "4SU9FjuPO1ZcGqQNylwxMaxuS4CQnedc4wOUEk9L"
-          AWS_SESSION_TOKEN: "IQoJb3JpZ2luX2VjELP//////////wEaCXVzLWVhc3QtMSJGMEQCIEA0MzZtgBy0KbWrd/t07tWqI+ExWLf4+2jQsAL+XWGmAiAXfYHbv2tcB7PbbNYlPIKYSvtS4TW+TRS1tM6xkY6AeiqVAwis//////////8BEAQaDDY0MzAxOTYxOTk1NSIMRuOs+fISqkpce0BVKukCd0ZervEkE/8fLgx0uulRYZkpsZJDIs6XeWQUY4EeEuUo4poK8F+5yOnBKp0uKW8+PuAn089FrHOifA3FL6KFX54wHmdP+GrNPLsKY1l0HDB6I+8PcwhtFYgK9+A7Bq74Qhe2AFyeD/ekWwk4fCSpCY9ABf0VVgXokqmUKUlALU6Q6b5UEf1IfqA7yvXDZy7grpxDAqmUw2tsAZv788KaJxfj5BqMF00a6teyMIrma9c2DxNM/CLq/pvw6lrwbqi5Cd2sMOwugLcr+WJL4LLGvBh+CNJMJ7ZADwIxBxSCQAJ9d5PV0ybfzADSEo9HdlSv8GYVkKEW/Rv6Tw9ydLWaL75kDokeo5SG3nWtLnAP/mW8wH6IiA2ebmgWK5/ef30jL/KRrZTxjwK1iWP/luKXexEY0n5R6dg6YqY8Xu9fGLRtWJl09MgIsd5Zqs++RqVlWuo8XEtmlEH8xQJ894bffGWjP0YKQWGi/zD7m9eoBjqnAdyT7jsRty/rQw5l6HpqYdL0C1TMswSHKDeH7/oxDF4Oj1anDAonuETHT4/3Vaokkx7qQPN+jiiNB0s1q8UtG0OLqsb72nTUvRwAGJoS5eLPpgZ1dtgZVy6teOemzq8MCs4SSbSCyruHjcMGZkrTvOL5pDpdEPMOJLMij77JoiiUP8JwSK/8uhCn0MseXfLX/KzYiCKhoerNFRsRJMaBjHpv0DD/tKvA"
           TF_VAR_ssh_private_key_file: ${{ secrets.SSH_PRIVATE_KEY_FILE }}
           TF_VAR_ssh_public_key_file: ${{ secrets.SSH_PUBLIC_KEY_FILE }}
         run: terraform plan -no-color
@@ -170,19 +169,19 @@ jobs:
       - name: Terraform Apply
         id: reapply
         env:
-            GH_PAT: ${{ secrets.GH_PAT }}
-            TF_TOKEN_APP_TERRAFORM_IO: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-            VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
-            TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
-            TF_VAR_f5xc_api_cert: ${{ secrets.TF_VAR_F5XC_API_CERT }}
-            TF_VAR_f5xc_api_key: ${{ secrets.TF_VAR_F5XC_API_KEY }}
-            TF_VAR_f5xc_tenant: ${{ secrets.F5XC_TENANT }}
-            TF_VAR_f5xc_api_token: ${{ secrets.F5XC_API_TOKEN }}
-            TF_VAR_f5xc_api_credential_password: ${{ secrets.F5XC_API_CREDENTIAL_PASSWORD }}
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            TF_VAR_ssh_private_key_file: ${{ secrets.SSH_PRIVATE_KEY_FILE }}
-            TF_VAR_ssh_public_key_file: ${{ secrets.SSH_PUBLIC_KEY_FILE }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          TF_TOKEN_APP_TERRAFORM_IO: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
+          VES_P12_PASSWORD: ${{ secrets.VES_P12_PASSWORD }}
+          TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
+          TF_VAR_f5xc_api_cert: ${{ secrets.TF_VAR_F5XC_API_CERT }}
+          TF_VAR_f5xc_api_key: ${{ secrets.TF_VAR_F5XC_API_KEY }}
+          TF_VAR_f5xc_tenant: ${{ secrets.F5XC_TENANT }}
+          TF_VAR_f5xc_api_token: ${{ secrets.F5XC_API_TOKEN }}
+          TF_VAR_f5xc_api_credential_password: ${{ secrets.F5XC_API_CREDENTIAL_PASSWORD }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_ssh_private_key_file: ${{ secrets.SSH_PRIVATE_KEY_FILE }}
+          TF_VAR_ssh_public_key_file: ${{ secrets.SSH_PUBLIC_KEY_FILE }}
         run: terraform apply -auto-approve -no-color
         continue-on-error: false
       - name: Cleanup environment

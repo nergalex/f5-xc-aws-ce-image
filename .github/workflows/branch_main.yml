@@ -21,6 +21,7 @@ jobs:
       - name: Retrieve the secret and decode it to a file
         env:
           GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
+          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
         run: |
           mkdir -p f5-xc-cert
           cd f5-xc-cert

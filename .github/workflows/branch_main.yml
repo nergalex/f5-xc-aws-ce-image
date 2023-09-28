@@ -18,7 +18,7 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
-      - name: Retrieve the secret and decode it to a file
+      - name: Decode and copy the XC API Client certificate
         env:
           GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
         run: |
@@ -60,20 +60,13 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
-#      - name: Make executable the shell script to decrypt API Client keys (P12)
-#        run: |
-#          chmod +x decrypt_secret.sh
-#      - name: Decrypt API Client keys (P12)
-#        run: ./decrypt_secret.sh
-#        env:
-#          GH_F5XC_API_P12_FILE_PASSPHRASE: ${{ secrets.GH_F5XC_API_P12_FILE_PASSPHRASE }}
-#          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
-      - name: Retrieve the secret and decode it to a file
+      - name: Decode and copy the XC API Client certificate
         env:
           GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
         run: |
-          cd f5-xc-cert && echo ${GH_F5XC_API_P12_FILE_B64} | base64 --decode > ${F5XC_API_P12_FILE}
-      - name: List files in the cert release
+          mkdir -p f5-xc-cert
+          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> f5-xc-cert/cert.p12
+      - name: List files in the cert directory
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert
       - name: Setup Terraform
@@ -126,7 +119,13 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
-      - name: List files in the cert release
+      - name: Decode and copy the XC API Client certificate
+        env:
+          GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
+        run: |
+          mkdir -p f5-xc-cert
+          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> f5-xc-cert/cert.p12
+      - name: List files in the cert directory
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert
       - name: Setup Terraform
@@ -179,7 +178,13 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
-      - name: List files in the cert release
+      - name: Decode and copy the XC API Client certificate
+        env:
+          GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
+        run: |
+          mkdir -p f5-xc-cert
+          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> f5-xc-cert/cert.p12
+      - name: List files in the cert directory
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert
       - name: Setup Terraform
@@ -232,7 +237,13 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
-      - name: List files in the cert release
+      - name: Decode and copy the XC API Client certificate
+        env:
+          GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
+        run: |
+          mkdir -p f5-xc-cert
+          echo "${GH_F5XC_API_P12_FILE_B64}" | base64 --decode >> f5-xc-cert/cert.p12
+      - name: List files in the cert directory
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert
       - name: Setup Terraform

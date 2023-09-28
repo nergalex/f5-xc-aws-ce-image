@@ -66,6 +66,19 @@ jobs:
       - name: List files in the release
         run: |
           ls -la ${{ github.workspace }}
+#      - name: Make executable the shell script to decrypt API Client keys (P12)
+#        run: |
+#          chmod +x decrypt_secret.sh
+#      - name: Decrypt API Client keys (P12)
+#        run: ./decrypt_secret.sh
+#        env:
+#          GH_F5XC_API_P12_FILE_PASSPHRASE: ${{ secrets.GH_F5XC_API_P12_FILE_PASSPHRASE }}
+#          F5XC_API_P12_FILE: ${{ secrets.F5XC_API_P12_FILE }}
+      - name: Retrieve the secret and decode it to a file
+        env:
+          GH_F5XC_API_P12_FILE_B64: ${{ secrets.GH_F5XC_API_P12_FILE_B64 }}
+        run: |
+          echo ${GH_F5XC_API_P12_FILE_B64} | base64 --decode > f5-xc-cert/${F5XC_API_P12_FILE}
       - name: List files in the cert release
         run: |
           ls -la ${{ github.workspace }}/f5-xc-cert

@@ -17,12 +17,10 @@ variable "f5xc_api_cert" {
 
 variable "aws_access_key_id" {
   type = string
-  default = ""
 }
 
 variable "aws_secret_access_key" {
   type = string
-  default = ""
 }
 
 variable "f5xc_api_key" {

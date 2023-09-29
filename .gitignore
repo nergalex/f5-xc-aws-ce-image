@@ -436,4 +436,3 @@ ck.tf
 .idea
 .terraform
 .terraform.lock.hcl
-/airliquide.console.ves.volterra.io.api-creds.p12.b64

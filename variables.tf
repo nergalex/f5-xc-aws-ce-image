@@ -12,12 +12,12 @@ variable "project_suffix" {
 
 variable "f5xc_api_cert" {
   type = string
-  default = ""
+  default = "f5-xc-cert/client.crt"
 }
 
 variable "f5xc_api_key" {
   type = string
-  default = ""
+  default = "f5-xc-cert/client.key"
 }
 
 variable "aws_access_key_id" {

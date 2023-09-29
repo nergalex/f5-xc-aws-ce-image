@@ -62,7 +62,7 @@ variable "f5xc_aws_availability_zone" {
 
 variable "owner" {
   type    = string
-  default = "c.klewar@f5.com"
+  default = "al.dacosta@f5.com"
 }
 
 variable "ssh_public_key_file" {
@@ -76,39 +76,4 @@ locals {
     f5xc-tenant  = var.f5xc_tenant
     f5xc-feature = "${var.project_prefix}-aws-vpc-site"
   }
-}
-
-variable "aws_vpc_cidr_block" {
-  description = "Custom CE VPC CIDR"
-  type = string
-}
-
-
-variable "f5xc_aws_vpc_slo_subnet" {
-  description = "Custom CE SLO subnet"
-  type = string
-}
-
-
-variable "f5xc_ce_gateway_type" {
-  description = "Custom CE gateway type"
-  type = string
-}
-
-
-variable "f5xc_cluster_latitude" {
-  description = "Custom CE geo location latitude"
-  type = string
-}
-
-
-variable "f5xc_cluster_longitude" {
-  description = "Custom CE geo location latitude"
-  type = string
-}
-
-
-variable "aws_vpc_name" {
-  description = "Custom CE existing AWS VPC name"
-  type = string
 }

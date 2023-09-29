@@ -69,7 +69,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
           TF_TOKEN_APP_TERRAFORM_IO: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-          VES_P12_PASSWORD: "A1rLiquide!"
+          VES_P12_PASSWORD: "A1rLiquide"
           TF_VAR_f5xc_api_p12_file: "airliquide.console.ves.volterra.io.api-creds.p12"
           TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
           TF_VAR_f5xc_api_cert: ${{ secrets.TF_VAR_F5XC_API_CERT }}

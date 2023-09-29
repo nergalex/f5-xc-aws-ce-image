@@ -45,7 +45,6 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
       f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "a")
     }
   }
-  f5xc_aws_vpc_slo_subnet     = "10.0.128.0/20"
   f5xc_ce_gateway_type        = "ingress_gateway"
   f5xc_cluster_latitude       = "48.866667"
   f5xc_cluster_longitude      = "2.333333"

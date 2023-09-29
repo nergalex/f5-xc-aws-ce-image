@@ -7,8 +7,8 @@ provider "volterra" {
 
 provider "aws" {
   region = var.f5xc_aws_region
-#  access_key = var.aws_access_key_id
-#  secret_key = var.aws_secret_access_key
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
   alias  = "default"
 }
 

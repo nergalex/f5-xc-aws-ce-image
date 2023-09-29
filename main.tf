@@ -2,7 +2,7 @@ provider "volterra" {
   url           = var.f5xc_api_url
   api_cert      = var.f5xc_api_cert
   api_key       = var.f5xc_api_key
-  api_p12_file  = "airliquide.console.ves.volterra.io.api-creds.p12"
+  api_p12_file  = "gg"
   alias         = "default"
 }
 

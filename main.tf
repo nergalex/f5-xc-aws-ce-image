@@ -1,18 +1,3 @@
-#provider "volterra" {
-#  url           = var.f5xc_api_url
-#  api_cert      = var.f5xc_api_cert
-#  api_key       = var.f5xc_api_key
-#  # api_p12_file  = "client.p12"
-#  alias         = "default"
-#}
-#
-#provider "aws" {
-#  region      = var.f5xc_aws_region
-#  access_key  = var.aws_access_key_id
-#  secret_key  = var.aws_secret_access_key
-#  alias       = "default"
-#}
-
 module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
   source             = "./modules/aws/vpc"
   aws_owner          = "al.dacosta@f5.com"
@@ -32,6 +17,7 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   is_sensitive          = false
   has_public_ip         = false
   create_new_aws_vpc    = false
+  f5xc_is_secure_cloud_ce = false  # Custom Alexis
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
   f5xc_api_token        = var.f5xc_api_token
@@ -49,7 +35,6 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   f5xc_cluster_latitude       = "48.866667"
   f5xc_cluster_longitude      = "2.333333"
   f5xc_aws_region             = "eu-west-3"
-  f5xc_is_secure_cloud_ce              = false  # Custom Alexis
   aws_existing_vpc_id                  = module.vpc__multi_node_single_nic_existing_vpc_existing_subnet.aws_vpc["id"]
   aws_security_group_rules_slo_egress  = []
   aws_security_group_rules_slo_ingress = []

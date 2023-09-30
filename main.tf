@@ -23,7 +23,6 @@ module "aws_ce" {
   f5xc_cluster_name      = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
   f5xc_cluster_labels    = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
   owner_tag              = "al.dacosta@f5.com"
-  public_name            = "vip"
   ssh_public_key         = file(var.ssh_public_key_file)
   providers              = {
     aws      = aws.default

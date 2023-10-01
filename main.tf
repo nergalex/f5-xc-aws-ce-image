@@ -14,6 +14,7 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
 module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   source                = "./modules/f5xc/ce/aws"
   owner_tag              = "al.dacosta@f5.com"
+  f5xc_is_secure_cloud_ce = false
   is_sensitive          = false
   has_public_ip         = false
   create_new_aws_vpc    = false
@@ -33,7 +34,6 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   }
   f5xc_cluster_latitude       = "48.866667"
   f5xc_cluster_longitude      = "2.333333"
-  f5xc_is_secure_cloud_ce= false
   aws_existing_vpc_id  = module.vpc__multi_node_single_nic_existing_vpc_existing_subnet.aws_vpc["id"]
   aws_security_group_rules_slo_egress = []
   aws_security_group_rules_slo_ingress = []

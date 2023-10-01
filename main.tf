@@ -13,8 +13,8 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
 
 module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   source                = "./modules/f5xc/ce/aws"
-  owner_tag              = "al.dacosta@f5.com"
-  f5xc_is_secure_cloud_ce = false
+  owner_tag             = "al.dacosta@f5.com"
+  f5xc_is_secure_cloud_ce = true
   is_sensitive          = false
   has_public_ip         = false
   create_new_aws_vpc    = false
@@ -22,10 +22,10 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   f5xc_api_url          = var.f5xc_api_url
   f5xc_api_token        = var.f5xc_api_token
   f5xc_namespace        = var.f5xc_namespace
-  f5xc_token_name        = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
-  f5xc_aws_region             = "eu-west-3"
-  f5xc_cluster_name      = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
-  f5xc_cluster_labels    = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
+  f5xc_token_name       = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_name     = format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix)
+  f5xc_cluster_labels   = { "ves.io/fleet" : format("%s-aws-ce-test-%s", var.project_prefix, var.project_suffix) }
+  f5xc_aws_region       = "eu-west-3"
   f5xc_aws_vpc_az_nodes = {
     node0 = {
       f5xc_aws_vpc_slo_subnet    = "10.0.128.0/20",

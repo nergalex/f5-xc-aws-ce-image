@@ -14,9 +14,9 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
 module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
   source                = "./modules/f5xc/ce/aws"
   owner_tag             = "al.dacosta@f5.com"
+  has_public_ip         = false
   f5xc_is_secure_cloud_ce = true
   is_sensitive          = false
-  has_public_ip         = false
   create_new_aws_vpc    = false
   f5xc_tenant           = var.f5xc_tenant
   f5xc_api_url          = var.f5xc_api_url
@@ -30,6 +30,7 @@ module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
     node0 = {
       f5xc_aws_vpc_slo_subnet    = "10.0.128.0/20",
       f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "a")
+      f5xc_aws_vpc_nat_gw_subnet = "10.0.128.0/20",
     }
   }
   f5xc_cluster_latitude       = "48.866667"

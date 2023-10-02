@@ -12,6 +12,13 @@ provider "aws" {
 #  alias       = "default"
 }
 
+provider "aws" {
+  region      = var.f5xc_aws_region
+  access_key  = var.aws_access_key_id
+  secret_key  = var.aws_secret_access_key
+  alias       = "default"
+}
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -20,19 +27,19 @@ data "aws_vpc" "vpc" {
   id = "vpc-0cb17b0f85a0faed4"
 }
 
-#module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
-#  source             = "./modules/aws/vpc"
-#  aws_owner          = "al.dacosta@f5.com"
-#  aws_vpc_name       = "vpc-cloudbuilder-ce-1nic"
-#  aws_vpc_cidr_block = "10.0.0.0/16"
-#  create_igw         = false
-#  aws_region         = var.f5xc_aws_region
-#  aws_az_name        = local.aws_availability_zone
-#  custom_tags        = local.custom_tags
-#  providers          = {
-#    aws = aws.default
-#  }
-#}
+module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
+  source             = "./modules/aws/vpc"
+  aws_owner          = "al.dacosta@f5.com"
+  aws_vpc_name       = "vpc-alexis-ce-1nic"
+  aws_vpc_cidr_block = "10.0.0.0/16"
+  create_igw         = false
+  aws_region         = var.f5xc_aws_region
+  aws_az_name        = local.aws_availability_zone
+  custom_tags        = local.custom_tags
+  providers          = {
+    aws = aws.default
+  }
+}
 
 
 #module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {

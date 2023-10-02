@@ -4,18 +4,11 @@ output "aws_vpc" {
     arn                 = aws_vpc.vpc.arn
     tags                = aws_vpc.vpc.tags
     owner               = aws_vpc.vpc.owner_id
-#    igw_id              = var.create_igw ? aws_internet_gateway.igw[0].id : null
+    igw_id              = var.create_igw ? aws_internet_gateway.igw[0].id : null
     create_igw          = var.create_igw # Change
     cidr_block          = aws_vpc.vpc.cidr_block
     dhcp_options_id     = aws_vpc.vpc.dhcp_options_id
     main_route_table_id = aws_vpc.vpc.main_route_table_id
   }
 }
-
-#output "account_id" {
-#  value = {
-#    account_id = data.aws_caller_identity.current.account_id # change
-#    vpc_id = data.aws_vpc.my_vpc.id # change
-#  }
-#}
 

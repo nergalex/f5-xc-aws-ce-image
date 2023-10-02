@@ -6,14 +6,8 @@ resource "aws_vpc" "vpc" {
   tags                 = merge({ Name = var.aws_vpc_name, Owner = var.aws_owner }, var.custom_tags)
 }
 
-#resource "aws_internet_gateway" "igw" {
-#  count  = var.create_igw ? 1 : 0
-#  vpc_id = aws_vpc.vpc.id
-#  tags   = merge({ Name = var.aws_vpc_name, Owner = var.aws_owner }, var.custom_tags)
-#}
-
-#data "aws_caller_identity" "current" {} # Change
-#
-#data "aws_vpc" "my_vpc" {
-#  id = "vpc-0cb17b0f85a0faed4"
-#}
+resource "aws_internet_gateway" "igw" {
+  count  = var.create_igw ? 1 : 0
+  vpc_id = aws_vpc.vpc.id
+  tags   = merge({ Name = var.aws_vpc_name, Owner = var.aws_owner }, var.custom_tags)
+}

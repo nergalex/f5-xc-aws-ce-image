@@ -9,22 +9,7 @@ provider "aws" {
   region      = var.f5xc_aws_region
   access_key  = var.aws_access_key_id
   secret_key  = var.aws_secret_access_key
-#  alias       = "default"
-}
-
-provider "aws" {
-  region      = var.f5xc_aws_region
-  access_key  = var.aws_access_key_id
-  secret_key  = var.aws_secret_access_key
   alias       = "default"
-}
-
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
-data "aws_vpc" "vpc" {
-  id = "vpc-0cb17b0f85a0faed4"
 }
 
 module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {

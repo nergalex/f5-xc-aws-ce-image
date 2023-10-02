@@ -4,7 +4,3 @@
 output "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
   value = module.vpc__multi_node_single_nic_existing_vpc_existing_subnet
 }
-output "Info_VPC" {
-  description = "path of the kubeconfig file"
-  value = data.aws_vpc.vpc.cidr_block
-}

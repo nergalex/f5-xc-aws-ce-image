@@ -15,7 +15,7 @@ jobs:
       - run: echo "The  ${{ github.release }} release has been cloned to the runner."
       - name: List files in the release
         run: |
-          ls -la ${{ github.workspace }}
+          ls -laR ${{ github.workspace }}
       - name: Copy the XC API Client key and certificate in PEM format
         env:
           GH_F5XC_CLIENT_API_CERT: ${{ secrets.GH_F5XC_CLIENT_API_CERT }}

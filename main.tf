@@ -6,7 +6,7 @@
 #}
 
 provider "aws" {
-  region      = "eu-west-3"
+  region      = var.f5xc_aws_region
   access_key  = var.aws_access_key_id
   secret_key  = var.aws_secret_access_key
   alias       = "default"
@@ -30,7 +30,7 @@ output "Info_VPC" {
 #  aws_owner          = "al.dacosta@f5.com"
 #  aws_region         = "eu-west-3"
 #  aws_vpc_name       = "vpc-cloudbuilder-ce-1nic"
-#  aws_vpc_cidr_block = "10.1.0.0/16"
+#  aws_vpc_cidr_block = "10.0.0.0/16"
 #  create_igw         = false
 #  aws_az_name        = local.aws_availability_zone
 #  custom_tags        = local.custom_tags

@@ -50,11 +50,6 @@ variable "f5xc_aws_cred" {
   default = "ck-aws-01"
 }
 
-variable "f5xc_aws_region" {
-  type    = string
-  default = "us-west-2"
-}
-
 variable "f5xc_aws_availability_zone" {
   type    = string
   default = "a"

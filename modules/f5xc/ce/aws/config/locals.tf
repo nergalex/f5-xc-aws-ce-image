@@ -1,7 +1,7 @@
 locals {
   gateway_type       = replace(var.f5xc_ce_gateway_type, "_", "-")
 #  hosts_context_node = templatefile("${path.module}/${var.templates_dir}/hosts",
-  hosts_context_node = templatefile("modules/f5xc/ce/aws/config/templates/hosts",
+  hosts_context_node = templatefile("/home/runner/work/f5-xc-aws-ce-image/f5-xc-aws-ce-image/modules/f5xc/ce/aws/config/templates/hosts",
     {
       public_address = "127.0.1.1"
       public_name    = var.f5xc_ce_hosts_public_name
@@ -9,7 +9,7 @@ locals {
   )
 
 #  hosts_context_pool = templatefile("${path.module}/${var.templates_dir}/hosts",
-  hosts_context_pool = templatefile("modules/f5xc/ce/aws/config/templates/hosts",
+  hosts_context_pool = templatefile("/home/runner/work/f5-xc-aws-ce-image/f5-xc-aws-ce-image/modules/f5xc/ce/aws/config/templates/hosts",
     {
       public_address = var.f5xc_ce_hosts_public_address
       public_name    = var.f5xc_ce_hosts_public_name
@@ -36,7 +36,7 @@ locals {
     }
   })
 
-  cloud_config = templatefile("modules/f5xc/ce/aws/config/templates/cloud-init.yml",
+  cloud_config = templatefile("/home/runner/work/f5-xc-aws-ce-image/f5-xc-aws-ce-image/modules/f5xc/ce/aws/config/templates/cloud-init.yml",
     {
       ssh_public_key    = var.ssh_public_key
       ntp_servers       = var.ntp_servers

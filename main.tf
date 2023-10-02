@@ -1,5 +1,5 @@
 provider "aws" {
-  region      = var.f5xc_aws_region
+  region      = "eu-west-3"
 }
 
 data "aws_availability_zones" "available" {

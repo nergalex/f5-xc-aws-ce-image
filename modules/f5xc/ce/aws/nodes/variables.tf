@@ -66,9 +66,10 @@ variable "aws_interface_sli_id" {
   type = string
 }
 
-variable "aws_iam_instance_profile_id" {
-  type = string
-}
+# Change
+#variable "aws_iam_instance_profile_id" {
+#  type = string
+#}
 
 variable "f5xc_api_url" {
   type = string

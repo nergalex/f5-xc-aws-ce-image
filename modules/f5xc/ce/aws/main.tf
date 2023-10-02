@@ -118,7 +118,7 @@ module "node" {
   aws_interface_slo_id        = module.network_node[each.key].ce["slo"]["id"]
   aws_interface_sli_id        = local.is_multi_nic ? module.network_node[each.key].ce["sli"]["id"] : null
   aws_lb_target_group_arn     = length(var.f5xc_aws_vpc_az_nodes) == 3 ? module.network_nlb[0].nlb["target_group"]["arn"] : null
-  aws_iam_instance_profile_id = aws_iam_instance_profile.instance_profile.id
+  # aws_iam_instance_profile_id = aws_iam_instance_profile.instance_profile.id # Change
   ssh_public_key_name         = aws_key_pair.aws_key.key_name
 }
 

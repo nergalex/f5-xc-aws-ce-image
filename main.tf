@@ -1,3 +1,10 @@
+provider "aws" {
+  region      = var.f5xc_aws_region
+  access_key  = var.aws_access_key_id
+  secret_key  = var.aws_secret_access_key
+  alias       = "default"
+}
+
 module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
   source             = "./modules/aws/vpc"
   aws_owner          = "al.dacosta@f5.com"

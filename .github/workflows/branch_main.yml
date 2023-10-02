@@ -1,42 +1,42 @@
 name: F5 XC AWS Cloud CE - main
 on: workflow_dispatch
 jobs:
-#  aws-cloud-ce-module-validate:
-#    runs-on: ubuntu-latest
-#    environment: demo
-#    steps:
-#      - run: echo "The job was automatically triggered by a ${{github.event_name}} event."
-#      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub."
-#      - run: echo "The value of your release is ${{ github.ref }} and your release is ${{ github.release }}."
-#      - name: Check out release and submodules
-#        uses: actions/checkout@v3
-#        with:
-#          ref: main
-#          fetch-depth: 0
-#          submodules: recursive
-#      - run: echo "The  ${{ github.release }} release has been cloned to the runner."
-#      - name: List files in the release
-#        run: |
-#          ls -la ${{ github.workspace }}
-#      - name: Setup Terraform
-#        id: setup_tf
-#        uses: hashicorp/setup-terraform@v2
-#        with:
-#          terraform_wrapper: false
-#      - name: Terraform fmt
-#        id: fmt
-#        run: terraform fmt -check
-#        continue-on-error: true
-#      - name: Terraform Init
-#        id: init
-#        env:
-#          TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-#        run: terraform init -upgrade
-#      - name: Terraform Validate
-#        id: validate
-#        env:
-#          TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
-#        run: terraform validate -no-color
+  aws-cloud-ce-module-validate:
+    runs-on: ubuntu-latest
+    environment: demo
+    steps:
+      - run: echo "The job was automatically triggered by a ${{github.event_name}} event."
+      - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub."
+      - run: echo "The value of your release is ${{ github.ref }} and your release is ${{ github.release }}."
+      - name: Check out release and submodules
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          fetch-depth: 0
+          submodules: recursive
+      - run: echo "The  ${{ github.release }} release has been cloned to the runner."
+      - name: List files in the release
+        run: |
+          ls -la ${{ github.workspace }}
+      - name: Setup Terraform
+        id: setup_tf
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+      - name: Terraform Init
+        id: init
+        env:
+          TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
+        run: terraform init -upgrade
+      - name: Terraform Validate
+        id: validate
+        env:
+          TF_VAR_f5xc_api_url: ${{ secrets.F5XC_API_URL }}
+        run: terraform validate -no-color
   aws-cloud-ce-module-plan:
     runs-on: ubuntu-latest
     environment: demo

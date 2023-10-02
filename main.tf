@@ -31,7 +31,7 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
 #  f5xc_aws_vpc_az_nodes = {
 #    node0 = {
 #      f5xc_aws_vpc_slo_subnet    = "10.0.128.0/20",
-#      f5xc_aws_vpc_az_name       = format("%s%s", var.f5xc_aws_region, "a")
+#      f5xc_aws_vpc_az_name       = local.aws_availability_zone
 #      f5xc_aws_vpc_nat_gw_subnet = "10.0.128.0/20",
 #    }
 #  }

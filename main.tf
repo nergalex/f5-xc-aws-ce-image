@@ -1,16 +1,26 @@
-module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
-  source             = "./modules/aws/vpc"
-  aws_owner          = "al.dacosta@f5.com"
-  aws_region         = "eu-west-3"
-  aws_vpc_name       = "vpc-alexis-ce-1nic"
-  aws_vpc_cidr_block = "10.1.0.0/16"
-  create_igw         = false
-  aws_az_name        = local.aws_availability_zone
-  custom_tags        = local.custom_tags
-  providers          = {
-    aws = aws.default
-  }
+data "aws_caller_identity" "current" {}
+
+locals {
+    account_id = data.aws_caller_identity.current.account_id
 }
+
+output "account_id" {
+  value = local.account_id
+}
+
+#module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
+#  source             = "./modules/aws/vpc"
+#  aws_owner          = "al.dacosta@f5.com"
+#  aws_region         = "eu-west-3"
+#  aws_vpc_name       = "vpc-alexis-ce-1nic"
+#  aws_vpc_cidr_block = "10.1.0.0/16"
+#  create_igw         = false
+#  aws_az_name        = local.aws_availability_zone
+#  custom_tags        = local.custom_tags
+#  providers          = {
+#    aws = aws.default
+#  }
+#}
 
 #module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {
 #  source                = "./modules/f5xc/ce/aws"

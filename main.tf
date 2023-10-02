@@ -5,19 +5,32 @@ provider "aws" {
   alias       = "default"
 }
 
-module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
-  source             = "./modules/aws/vpc"
-  aws_owner          = "al.dacosta@f5.com"
-  aws_region         = "eu-west-3"
-  aws_vpc_name       = "vpc-cloudbuilder-ce-1nic"
-  aws_vpc_cidr_block = "10.1.0.0/16"
-  create_igw         = false
-  aws_az_name        = local.aws_availability_zone
-  custom_tags        = local.custom_tags
-  providers          = {
-    aws = aws.default
-  }
+data "aws_availability_zones" "available" {
+  state = "available"
 }
+
+data "aws_vpc" "vpc" {
+  id = "vpc-0cb17b0f85a0faed4"
+}
+
+output "Info_VPC" {
+  description = "path of the kubeconfig file"
+  value = data.aws_vpc.vpc.cidr_block
+}
+
+#module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
+#  source             = "./modules/aws/vpc"
+#  aws_owner          = "al.dacosta@f5.com"
+#  aws_region         = "eu-west-3"
+#  aws_vpc_name       = "vpc-cloudbuilder-ce-1nic"
+#  aws_vpc_cidr_block = "10.1.0.0/16"
+#  create_igw         = false
+#  aws_az_name        = local.aws_availability_zone
+#  custom_tags        = local.custom_tags
+#  providers          = {
+#    aws = aws.default
+#  }
+#}
 
 
 #module "f5xc_aws_secure_ce_single_node_single_nic_existing_vpc" {

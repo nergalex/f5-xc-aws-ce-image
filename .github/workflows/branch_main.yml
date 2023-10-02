@@ -134,7 +134,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: demo
 #    needs: [aws-cloud-ce-module-reapply]
-    needs: [aws-cloud-ce-module-apply]
+    needs: [aws-cloud-ce-module-init-plan-apply]
     steps:
       - run: echo "The job was automatically triggered by a ${{github.event_name}} event."
       - run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub."

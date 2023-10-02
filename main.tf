@@ -2,7 +2,7 @@ module "vpc__multi_node_single_nic_existing_vpc_existing_subnet" {
   source             = "./modules/aws/vpc"
   aws_owner          = "al.dacosta@f5.com"
   aws_region         = "eu-west-3"
-  aws_vpc_name       = "vpc-alexis-ce-1nic"
+  aws_vpc_name       = "vpc-cloudbuilder-ce-1nic"
   aws_vpc_cidr_block = "10.1.0.0/16"
   create_igw         = false
   aws_az_name        = local.aws_availability_zone
